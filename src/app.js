@@ -28,6 +28,7 @@ import { WORK_PILLARS, CASE_STUDIES } from './data/workData.js';
 import { learningProgress } from './learningProgress.js';
 import { initCyberCanvas } from './canvas.js';
 import { analytics } from './analytics.js';
+import { cyberBot } from './chatbot.js';
 
 class ShieldApp {
   constructor() {
@@ -67,6 +68,9 @@ class ShieldApp {
     this.setupGlobalEventListeners();
     this.injectGlobalSchema();
     this.refreshIcons();
+
+    // Initialize AI CyberBot Floating Assistant
+    cyberBot.init();
 
     analytics.track('pageview', 'Pageview', 'init');
   }
