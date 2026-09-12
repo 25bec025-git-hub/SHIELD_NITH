@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Primary Meta Tags -->
+  <title>SHIELD Cybersecurity Society | NIT Hamirpur</title>
+  <meta name="title" content="SHIELD Cybersecurity Society | NIT Hamirpur" />
+  <meta name="description" content="Official Cybersecurity Society of NIT Hamirpur. Specialized in ethical hacking, CTFs, binary exploitation, web security, reverse engineering, and bug bounties." />
+  <meta name="keywords" content="SHIELD, NIT Hamirpur, Cybersecurity Society, NITH, CTF, Ethical Hacking, Reverse Engineering, Pwn, Bug Bounty, DoCSE" />
+  <meta name="author" content="SHIELD Cybersecurity Society" />
+  <meta name="theme-color" content="#070a12" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://shield-nith.ac.in/" />
+  <meta property="og:title" content="SHIELD Cybersecurity Society | NIT Hamirpur" />
+  <meta property="og:description" content="Defending the Byte. Securing the Future. Explore workshops, CTFs, lab tools, and join the elite cyber team at NIT Hamirpur." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80" />
+
+  <!-- Twitter Card -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://shield-nith.ac.in/" />
+  <meta property="twitter:title" content="SHIELD Cybersecurity Society | NIT Hamirpur" />
+  <meta property="twitter:description" content="Defending the Byte. Securing the Future. Explore workshops, CTFs, lab tools, and join the elite cyber team at NIT Hamirpur." />
+  <meta property="twitter:image" content="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300f3ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/></svg>" />
+
+  <!-- Google Analytics Tracking Code (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SHIELDNITH2026"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SHIELDNITH2026', { send_page_view: true });
+  </script>
+
+  <!-- CSS Entry -->
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body class="bg-cyber-bg text-cyber-text antialiased font-sans min-h-screen flex flex-col">
+
+  <!-- Accessibility Skip Link -->
+  <a href="#app-main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-cyber-cyan focus:text-black focus:font-mono focus:rounded-md focus:shadow-neon-cyan">
+    Skip to main content
+  </a>
+
+  <!-- Header Shell -->
+  <div id="app-header"></div>
+
+  <!-- Main Content Body -->
+  <main id="app-main" class="flex-grow focus:outline-none" tabindex="-1" role="main">
+    <!-- Dynamic page content injected via app.js -->
+  </main>
+
+  <!-- Footer Shell -->
+  <div id="app-footer"></div>
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- 1. Live Site Analytics & Admin Dashboard Modal -->
+  <div id="analytics-modal" class="hidden fixed inset-0 z-50 modal-backdrop items-center justify-center p-4 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="analytics-modal-title">
+    <div class="cyber-card w-full max-w-4xl rounded-2xl p-6 sm:p-8 space-y-6 relative border border-cyber-cyan/40">
+      <button id="close-analytics-modal" class="absolute top-4 right-4 p-2 text-cyber-muted hover:text-white rounded-md" aria-label="Close Analytics Modal">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="flex items-center space-x-3 border-b border-cyber-cardBorder pb-4">
+        <div class="w-10 h-10 rounded-lg bg-cyber-cyan/10 border border-cyber-cyan/40 flex items-center justify-center text-cyber-cyan">
+          <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h2 id="analytics-modal-title" class="text-xl font-bold font-display text-white">Live Platform Analytics & Audit Dashboard</h2>
+          <p class="text-xs font-mono text-cyber-teal">Real-time user event tracking & interaction metrics</p>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+        <div class="p-4 rounded-xl bg-cyber-bg/80 border border-cyber-cardBorder">
+          <div id="stat-total-events" class="text-2xl font-mono font-bold text-cyber-cyan">0</div>
+          <div class="text-[11px] text-cyber-muted uppercase mt-1">Total Interactions</div>
+        </div>
+        <div class="p-4 rounded-xl bg-cyber-bg/80 border border-cyber-cardBorder">
+          <div id="stat-pageviews" class="text-2xl font-mono font-bold text-cyber-teal">0</div>
+          <div class="text-[11px] text-cyber-muted uppercase mt-1">Pageviews</div>
+        </div>
+        <div class="p-4 rounded-xl bg-cyber-bg/80 border border-cyber-cardBorder">
+          <div id="stat-registrations" class="text-2xl font-mono font-bold text-cyber-purple">0</div>
+          <div class="text-[11px] text-cyber-muted uppercase mt-1">Event Registrations</div>
+        </div>
+        <div class="p-4 rounded-xl bg-cyber-bg/80 border border-cyber-cardBorder">
+          <div id="stat-downloads" class="text-2xl font-mono font-bold text-cyber-red">0</div>
+          <div class="text-[11px] text-cyber-muted uppercase mt-1">Resource Clicks</div>
+        </div>
+      </div>
+
+      <!-- Chart Visualization -->
+      <div class="cyber-card p-4 rounded-xl space-y-2">
+        <h3 class="text-xs font-mono text-cyber-muted">PAGE INTERACTION GRAPH (CHART.JS)</h3>
+        <div class="h-60 relative w-full">
+          <canvas id="analytics-chart-canvas"></canvas>
+        </div>
+      </div>
+
+      <!-- Live Event Logs Table -->
+      <div class="space-y-2">
+        <h3 class="text-xs font-mono text-cyber-muted">RECENT CLIENT EVENT STREAM</h3>
+        <div class="overflow-x-auto max-h-48 overflow-y-auto border border-cyber-cardBorder rounded-lg p-2 bg-cyber-bg/90">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-cyber-cardBorder text-[11px] font-mono text-cyber-teal">
+                <th class="py-1">Time</th>
+                <th class="py-1">Category</th>
+                <th class="py-1">Event Name</th>
+                <th class="py-1">Target / Label</th>
+              </tr>
+            </thead>
+            <tbody id="analytics-logs-tbody">
+              <!-- Injected dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2. Team Member Profile Bio Modal -->
+  <div id="member-modal" class="hidden fixed inset-0 z-50 modal-backdrop items-center justify-center p-4" role="dialog" aria-modal="true">
+    <div class="cyber-card w-full max-w-lg rounded-2xl p-6 space-y-4 relative border border-cyber-cyan/40">
+      <button id="close-member-modal" class="absolute top-4 right-4 p-2 text-cyber-muted hover:text-white rounded-md">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="flex items-center space-x-4">
+        <div id="member-modal-img" class="w-20 h-20 rounded-full border-2 border-cyber-cyan bg-cyber-card flex items-center justify-center flex-shrink-0">
+          <i data-lucide="user" class="w-10 h-10 text-cyber-cyan/30"></i>
+        </div>
+        <div>
+          <h3 id="member-modal-name" class="text-xl font-bold font-display text-white">Name</h3>
+          <p id="member-modal-role" class="text-xs font-mono text-cyber-cyan">Role</p>
+          <span id="member-modal-batch" class="cyber-badge cyber-badge-teal mt-1">Batch</span>
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-cyber-cardBorder">
+        <h4 class="text-xs font-mono text-cyber-muted uppercase mb-2">BIOGRAPHY & RESEARCH FOCUS</h4>
+        <p id="member-modal-bio" class="text-sm text-cyber-text leading-relaxed">Bio text...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Event Registration Modal -->
+  <div id="registration-modal" class="hidden fixed inset-0 z-50 modal-backdrop items-center justify-center p-4" role="dialog" aria-modal="true">
+    <div class="cyber-card w-full max-w-md rounded-2xl p-6 space-y-4 relative border border-cyber-cyan/40">
+      <button id="close-registration-modal" class="absolute top-4 right-4 p-2 text-cyber-muted hover:text-white rounded-md">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="space-y-1">
+        <span class="cyber-badge cyber-badge-cyan">EVENT REGISTRATION</span>
+        <h3 id="reg-modal-event-title" class="text-xl font-bold font-display text-white">Event Title</h3>
+        <p id="reg-modal-event-date" class="text-xs font-mono text-cyber-teal">Date & Location</p>
+      </div>
+
+      <form id="event-reg-form" class="space-y-3 pt-2">
+        <div>
+          <label for="reg-student-name" class="block text-xs font-mono text-cyber-muted mb-1">Full Name *</label>
+          <input type="text" id="reg-student-name" required placeholder="Student Name" class="w-full px-3 py-2 bg-cyber-bg border border-cyber-cardBorder rounded text-xs text-white focus:border-cyber-cyan focus:outline-none" />
+        </div>
+        <div>
+          <label for="reg-roll-no" class="block text-xs font-mono text-cyber-muted mb-1">NITH Roll No / Registration No *</label>
+          <input type="text" id="reg-roll-no" required placeholder="e.g. 23BCE045" class="w-full px-3 py-2 bg-cyber-bg border border-cyber-cardBorder rounded text-xs text-white focus:border-cyber-cyan focus:outline-none" />
+        </div>
+        <div>
+          <label for="reg-email" class="block text-xs font-mono text-cyber-muted mb-1">Student Email *</label>
+          <input type="email" id="reg-email" required placeholder="student@nith.ac.in" class="w-full px-3 py-2 bg-cyber-bg border border-cyber-cardBorder rounded text-xs text-white focus:border-cyber-cyan focus:outline-none" />
+        </div>
+
+        <button type="submit" class="btn-cyber-primary w-full py-2.5 text-xs font-mono mt-4">
+          Confirm Registration
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 4. Membership Application Modal -->
+  <div id="membership-modal" class="hidden fixed inset-0 z-50 modal-backdrop items-center justify-center p-4" role="dialog" aria-modal="true">
+    <div class="cyber-card w-full max-w-lg rounded-2xl p-6 sm:p-8 space-y-4 relative border border-cyber-cyan/40">
+      <button id="close-membership-modal" class="absolute top-4 right-4 p-2 text-cyber-muted hover:text-white rounded-md">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="space-y-1">
+        <span class="cyber-badge cyber-badge-cyan">SOCIETY INDUCTION</span>
+        <h3 class="text-2xl font-bold font-display text-white">Join SHIELD Cybersecurity Society</h3>
+        <p class="text-xs text-cyber-muted">Open to all NIT Hamirpur students across all branches & years.</p>
+      </div>
+
+      <form id="membership-app-form" class="space-y-3 pt-2">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label for="mem-name" class="block text-xs font-mono text-cyber-muted mb-1">Full Name *</label>
+            <input type="text" id="mem-name" required placeholder="Student Name" class="w-full px-3 py-2 bg-cyber-bg border border-cyber-cardBorder rounded text-xs text-white focus:border-cyber-cyan focus:outline-none" />
+          </div>
+          <div>
+            <label for="mem-roll" class="block text-xs font-mono text-cyber-muted mb-1">NITH Roll Number *</label>
+            <input type="text" id="mem-roll" required placeholder="23BCE012" class="w-full px-3 py-2 bg-cyber-bg border border-cyber-cardBorder rounded text-xs text-white focus:border-cyber-cyan focus:outline-none" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label for="mem-domain" class="block text-xs font-mono text-cyber-muted mb-1">Primary Interest Domain *</label>
+            <select id="mem-domain" class="w-full px-3 py-2 bg-cyber-bg border border-cyber-cardBorder rounded text-xs text-white focus:border-cyber-cyan focus:outline-none">
+              <option value="Ethical Hacking & WebSec">Ethical Hacking & WebSec</option>
+              <option value="Binary Exploitation (Pwn)">Binary Exploitation (Pwn)</option>
+              <option value="Reverse Engineering">Reverse Engineering</option>
+              <option value="Applied Cryptography">Applied Cryptography</option>
+              <option value="Digital Forensics & Incident Response">Digital Forensics & IR</option>
+            </select>
+          </div>
+          <div>
+            <label for="mem-experience" class="block text-xs font-mono text-cyber-muted mb-1">Cyber Experience Level *</label>
+            <select id="mem-experience" class="w-full px-3 py-2 bg-cyber-bg border border-cyber-cardBorder rounded text-xs text-white focus:border-cyber-cyan focus:outline-none">
+              <option value="Beginner (Eager to learn)">Beginner (Eager to learn)</option>
+              <option value="Intermediate (Played CTFs)">Intermediate (Played CTFs)</option>
+              <option value="Advanced (Active Bug Hunter/Pwnable)">Advanced (Bug Hunter/Pwner)</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="mem-github" class="block text-xs font-mono text-cyber-muted mb-1">GitHub / TryHackMe / HackTheBox Profile (Optional)</label>
+          <input type="url" id="mem-github" placeholder="https://tryhackme.com/p/yourname" class="w-full px-3 py-2 bg-cyber-bg border border-cyber-cardBorder rounded text-xs text-white focus:border-cyber-cyan focus:outline-none" />
+        </div>
+
+        <button type="submit" class="btn-cyber-primary w-full py-3 text-xs font-mono mt-4">
+          Submit Membership Application
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 5. Article Reader Modal -->
+  <div id="article-modal" class="hidden fixed inset-0 z-50 modal-backdrop items-center justify-center p-4 overflow-y-auto" role="dialog" aria-modal="true">
+    <div class="cyber-card w-full max-w-2xl rounded-2xl p-6 sm:p-8 space-y-6 relative border border-cyber-cyan/40 my-8">
+      <button id="close-article-modal" class="absolute top-4 right-4 p-2 text-cyber-muted hover:text-white rounded-md">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="space-y-2 border-b border-cyber-cardBorder pb-4">
+        <h2 id="art-modal-title" class="text-2xl font-bold font-display text-white">Article Title</h2>
+        <div id="art-modal-meta" class="text-xs font-mono text-cyber-cyan">Meta details</div>
+      </div>
+
+      <div id="art-modal-body" class="text-sm text-cyber-text space-y-4 leading-relaxed font-sans max-h-96 overflow-y-auto pr-2">
+        <!-- Article markdown content rendered here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Gallery Lightbox Modal -->
+  <div id="lightbox-modal" class="hidden fixed inset-0 z-50 modal-backdrop items-center justify-center p-4" role="dialog" aria-modal="true">
+    <div class="relative max-w-4xl w-full text-center space-y-3">
+      <button id="close-lightbox-modal" class="absolute -top-10 right-0 p-2 text-white hover:text-cyber-cyan">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+
+      <img id="lightbox-img" src="" alt="Gallery Image" class="max-h-[75vh] mx-auto rounded-xl border border-cyber-cyan/40 shadow-glow-lg object-contain" />
+      <div>
+        <h3 id="lightbox-title" class="text-xl font-bold font-display text-white">Title</h3>
+        <p id="lightbox-caption" class="text-xs text-cyber-muted">Caption text</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Sponsor Inquiry Modal -->
+  <div id="sponsor-modal" class="hidden fixed inset-0 z-50 modal-backdrop items-center justify-center p-4" role="dialog" aria-modal="true">
+    <div class="cyber-card w-full max-w-md rounded-2xl p-6 space-y-4 relative border border-cyber-cyan/40">
+      <button id="close-sponsor-modal" class="absolute top-4 right-4 p-2 text-cyber-muted hover:text-white rounded-md">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="space-y-1">
+        <span class="cyber-badge cyber-badge-cyan">PARTNERSHIP INQUIRY</span>
+        <h3 class="text-xl font-bold font-display text-white">Sponsor SHIELD NITH</h3>
+        <p class="text-xs text-cyber-muted">Request event sponsorship tiers & recruitment partnership deck.</p>
+      </div>
+
+      <form id="sponsor-inquiry-form" class="space-y-3 pt-2">
+        <div>
+          <label for="sponsor-company" class="block text-xs font-mono text-cyber-muted mb-1">Company / Organization Name *</label>
+          <input type="text" id="sponsor-company" required placeholder="e.g. CrowdStrike / Google Security" class="w-full px-3 py-2 bg-cyber-bg border border-cyber-cardBorder rounded text-xs text-white focus:border-cyber-cyan focus:outline-none" />
+        </div>
+        <div>
+          <label for="sponsor-contact-name" class="block text-xs font-mono text-cyber-muted mb-1">Contact Person Name *</label>
+          <input type="text" id="sponsor-contact-name" required placeholder="Contact Name" class="w-full px-3 py-2 bg-cyber-bg border border-cyber-cardBorder rounded text-xs text-white focus:border-cyber-cyan focus:outline-none" />
+        </div>
+        <div>
+          <label for="sponsor-email" class="block text-xs font-mono text-cyber-muted mb-1">Work Email *</label>
+          <input type="email" id="sponsor-email" required placeholder="person@company.com" class="w-full px-3 py-2 bg-cyber-bg border border-cyber-cardBorder rounded text-xs text-white focus:border-cyber-cyan focus:outline-none" />
+        </div>
+
+        <button type="submit" class="btn-cyber-primary w-full py-2.5 text-xs font-mono mt-4">
+          Request Sponsorship Brochure
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Entry Script -->
+  <script type="module" src="/src/app.js"></script>
+</body>
+</html>
