@@ -24,6 +24,7 @@ import {
   getDomainCurriculum
 } from './data/learningData.js';
 
+import { WORK_PILLARS, CASE_STUDIES } from './data/workData.js';
 import { learningProgress } from './learningProgress.js';
 import { initCyberCanvas } from './canvas.js';
 import { analytics } from './analytics.js';
@@ -39,6 +40,9 @@ class ShieldApp {
     this.blogFilter = 'All';
     this.galleryFilter = 'All';
     this.faqSearch = '';
+
+    // Work Section State
+    this.workFilter = 'All';
 
     // Learning Hub State
     this.learningSearch = '';
@@ -121,7 +125,7 @@ class ShieldApp {
   }
 
   navigateTo(sectionId, subRoute = '', updateHash = true) {
-    const validSections = ['home', 'about', 'team', 'events', 'projects', 'blog', 'gallery', 'sponsors', 'faq', 'contact', 'learning'];
+    const validSections = ['home', 'work', 'about', 'team', 'events', 'projects', 'blog', 'gallery', 'sponsors', 'faq', 'contact', 'learning'];
     const target = validSections.includes(sectionId) ? sectionId : 'home';
 
     this.currentSection = target;
@@ -179,12 +183,16 @@ class ShieldApp {
           <!-- Desktop Navigation -->
           <nav class="hidden md:flex items-center space-x-5 text-sm font-medium" aria-label="Main Navigation">
             <a href="#home" class="nav-link py-2 px-1 transition-colors hover:text-cyber-cyan" data-section="home">Home</a>
+            <a href="#work" class="nav-link py-2 px-1 transition-colors hover:text-cyber-cyan text-cyber-cyan font-semibold flex items-center space-x-1" data-section="work">
+              <i data-lucide="briefcase" class="w-4 h-4 text-cyber-cyan mr-1 inline"></i>
+              <span>Our Work</span>
+            </a>
             <a href="#about" class="nav-link py-2 px-1 transition-colors hover:text-cyber-cyan" data-section="about">About</a>
             <a href="#team" class="nav-link py-2 px-1 transition-colors hover:text-cyber-cyan" data-section="team">Team</a>
             <a href="#events" class="nav-link py-2 px-1 transition-colors hover:text-cyber-cyan" data-section="events">Events</a>
             <a href="#projects" class="nav-link py-2 px-1 transition-colors hover:text-cyber-cyan" data-section="projects">Projects</a>
-            <a href="#learning" class="nav-link py-2 px-1 transition-colors hover:text-cyber-cyan text-cyber-cyan font-semibold flex items-center space-x-1" data-section="learning">
-              <i data-lucide="book-open" class="w-4 h-4 text-cyber-cyan mr-1 inline"></i>
+            <a href="#learning" class="nav-link py-2 px-1 transition-colors hover:text-cyber-cyan flex items-center space-x-1" data-section="learning">
+              <i data-lucide="book-open" class="w-4 h-4 text-cyber-teal mr-1 inline"></i>
               <span>Learning</span>
             </a>
             <a href="#blog" class="nav-link py-2 px-1 transition-colors hover:text-cyber-cyan" data-section="blog">Blog</a>
@@ -219,11 +227,12 @@ class ShieldApp {
         <!-- Mobile Navigation Menu Dropdown -->
         <div id="mobile-menu" class="hidden md:hidden border-b border-cyber-cardBorder bg-cyber-bg/95 backdrop-blur-xl px-4 pt-2 pb-6 space-y-3">
           <a href="#home" class="mobile-nav-link block py-2 px-3 rounded-md hover:bg-cyber-cardHover text-cyber-text">Home</a>
+          <a href="#work" class="mobile-nav-link block py-2 px-3 rounded-md hover:bg-cyber-cardHover text-cyber-cyan font-bold">Our Work & Impact</a>
           <a href="#about" class="mobile-nav-link block py-2 px-3 rounded-md hover:bg-cyber-cardHover text-cyber-text">About</a>
           <a href="#team" class="mobile-nav-link block py-2 px-3 rounded-md hover:bg-cyber-cardHover text-cyber-text">Team</a>
           <a href="#events" class="mobile-nav-link block py-2 px-3 rounded-md hover:bg-cyber-cardHover text-cyber-text">Events</a>
           <a href="#projects" class="mobile-nav-link block py-2 px-3 rounded-md hover:bg-cyber-cardHover text-cyber-text">Projects</a>
-          <a href="#learning" class="mobile-nav-link block py-2 px-3 rounded-md hover:bg-cyber-cardHover text-cyber-cyan font-bold">Learning Hub</a>
+          <a href="#learning" class="mobile-nav-link block py-2 px-3 rounded-md hover:bg-cyber-cardHover text-cyber-text">Learning Hub</a>
           <a href="#blog" class="mobile-nav-link block py-2 px-3 rounded-md hover:bg-cyber-cardHover text-cyber-text">Blog</a>
           <a href="#gallery" class="mobile-nav-link block py-2 px-3 rounded-md hover:bg-cyber-cardHover text-cyber-text">Gallery</a>
           <a href="#sponsors" class="mobile-nav-link block py-2 px-3 rounded-md hover:bg-cyber-cardHover text-cyber-text">Sponsors</a>
@@ -292,24 +301,24 @@ class ShieldApp {
             <div>
               <h3 class="font-mono text-sm font-semibold text-white uppercase tracking-wider mb-4">Quick Links</h3>
               <ul class="space-y-2.5 text-sm">
+                <li><a href="#work" class="hover:text-cyber-cyan transition-colors text-cyber-cyan">Our Work & Impact</a></li>
                 <li><a href="#about" class="hover:text-cyber-cyan transition-colors">About Us</a></li>
-                <li><a href="#learning" class="hover:text-cyber-cyan transition-colors text-cyber-cyan">Learning Hub</a></li>
+                <li><a href="#learning" class="hover:text-cyber-cyan transition-colors">Learning Hub</a></li>
                 <li><a href="#team" class="hover:text-cyber-cyan transition-colors">Executive Team</a></li>
                 <li><a href="#events" class="hover:text-cyber-cyan transition-colors">CTFs & Workshops</a></li>
                 <li><a href="#projects" class="hover:text-cyber-cyan transition-colors">Lab Tools & Resources</a></li>
-                <li><a href="#blog" class="hover:text-cyber-cyan transition-colors">Blog & Advisories</a></li>
               </ul>
             </div>
 
             <!-- Col 3: Society Pillars -->
             <div>
-              <h3 class="font-mono text-sm font-semibold text-white uppercase tracking-wider mb-4">Learning Tracks</h3>
+              <h3 class="font-mono text-sm font-semibold text-white uppercase tracking-wider mb-4">Core Deliverables</h3>
               <ul class="space-y-2.5 text-sm">
-                <li><a href="#learning/network-security" class="hover:text-cyber-cyan flex items-center space-x-2"><i data-lucide="network" class="w-3.5 h-3.5 text-cyber-cyan"></i><span>Network Security</span></a></li>
-                <li><a href="#learning/web-security" class="hover:text-cyber-cyan flex items-center space-x-2"><i data-lucide="globe" class="w-3.5 h-3.5 text-cyber-teal"></i><span>Web Security</span></a></li>
-                <li><a href="#learning/cryptography" class="hover:text-cyber-cyan flex items-center space-x-2"><i data-lucide="key-round" class="w-3.5 h-3.5 text-cyber-purple"></i><span>Cryptography</span></a></li>
-                <li><a href="#learning/linux-security" class="hover:text-cyber-cyan flex items-center space-x-2"><i data-lucide="terminal" class="w-3.5 h-3.5 text-cyber-cyan"></i><span>Linux & Systems</span></a></li>
-                <li><a href="#learning/cheatsheets" class="hover:text-cyber-cyan flex items-center space-x-2"><i data-lucide="file-text" class="w-3.5 h-3.5 text-cyber-red"></i><span>Security Cheatsheets</span></a></li>
+                <li class="flex items-center space-x-2"><i data-lucide="shield-alert" class="w-3.5 h-3.5 text-cyber-red"></i><span>Vulnerability Research</span></li>
+                <li class="flex items-center space-x-2"><i data-lucide="trophy" class="w-3.5 h-3.5 text-cyber-cyan"></i><span>National CTF Podium Wins</span></li>
+                <li class="flex items-center space-x-2"><i data-lucide="terminal" class="w-3.5 h-3.5 text-cyber-teal"></i><span>Free Cyber Bootcamps</span></li>
+                <li class="flex items-center space-x-2"><i data-lucide="bug" class="w-3.5 h-3.5 text-cyber-purple"></i><span>Bug Bounty Achievements</span></li>
+                <li class="flex items-center space-x-2"><i data-lucide="code-2" class="w-3.5 h-3.5 text-cyber-cyan"></i><span>Open Source Security Tools</span></li>
               </ul>
             </div>
 
@@ -359,6 +368,10 @@ class ShieldApp {
       case 'home':
         mainEl.innerHTML = this.getHomeHTML();
         break;
+      case 'work':
+        mainEl.innerHTML = this.getWorkHTML();
+        this.bindWorkListeners();
+        break;
       case 'about':
         mainEl.innerHTML = this.getAboutHTML();
         break;
@@ -401,6 +414,158 @@ class ShieldApp {
     this.refreshIcons();
   }
 
+  // --- OUR WORK SECTION RENDERERS ---
+
+  getWorkHTML() {
+    const categories = ['All', 'Vulnerability Research', 'CTF Competitions', 'Bootcamps & Training', 'Bug Bounty', 'Open Source', 'Security Audits'];
+    
+    let filteredPillars = WORK_PILLARS;
+    if (this.workFilter !== 'All') {
+      filteredPillars = WORK_PILLARS.filter(p => p.category === this.workFilter);
+    }
+
+    return `
+      <div class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+        
+        <!-- Hero Header -->
+        <div class="text-center max-w-3xl mx-auto space-y-4">
+          <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-cyber-cyan/10 border border-cyber-cyan/30 text-cyber-cyan text-xs font-mono">
+            <i data-lucide="briefcase" class="w-4 h-4"></i>
+            <span>WHAT SHIELD CYBERSECURITY SOCIETY DOES</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-5xl font-display font-extrabold text-white">
+            Our Work, Mission & <span class="bg-gradient-to-r from-cyber-cyan to-cyber-teal bg-clip-text text-transparent">Real-World Impact</span>
+          </h1>
+
+          <p class="text-cyber-muted text-sm sm:text-base leading-relaxed">
+            At NIT Hamirpur, SHIELD serves as the premier student hub for vulnerability research, competitive CTFs, practical cyber bootcamps, bug bounties, and open-source security tool engineering.
+          </p>
+        </div>
+
+        <!-- Impact Statistics Banner -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+          <div class="cyber-card p-6 rounded-2xl border border-cyber-cardBorder space-y-1">
+            <i data-lucide="trophy" class="w-6 h-6 text-cyber-cyan mx-auto mb-1"></i>
+            <div class="text-3xl font-mono font-bold text-white">34+</div>
+            <div class="text-xs font-mono text-cyber-muted">National CTF Podiums</div>
+          </div>
+          <div class="cyber-card p-6 rounded-2xl border border-cyber-cardBorder space-y-1">
+            <div class="text-3xl font-mono font-bold text-cyber-teal">₹2.4M+</div>
+            <div class="text-xs font-mono text-cyber-muted">Bug Bounties Won</div>
+          </div>
+          <div class="cyber-card p-6 rounded-2xl border border-cyber-cardBorder space-y-1">
+            <div class="text-3xl font-mono font-bold text-cyber-purple">50+</div>
+            <div class="text-xs font-mono text-cyber-muted">Bootcamps & Bootlabs</div>
+          </div>
+          <div class="cyber-card p-6 rounded-2xl border border-cyber-cardBorder space-y-1">
+            <div class="text-3xl font-mono font-bold text-cyber-red">15+</div>
+            <div class="text-xs font-mono text-cyber-muted">CVEs Disclosed</div>
+          </div>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-2">
+          ${categories.map(cat => `
+            <button class="work-filter-btn px-4 py-2 text-xs font-mono rounded-md border transition-all ${this.workFilter === cat ? 'bg-cyber-cyan text-black border-cyber-cyan font-bold shadow-neon-cyan' : 'bg-cyber-card text-cyber-muted border-cyber-cardBorder hover:text-white'}" data-category="${cat}">
+              ${cat}
+            </button>
+          `).join('')}
+        </div>
+
+        <!-- Work Pillars Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          ${filteredPillars.map(pillar => `
+            <div class="cyber-card p-6 rounded-2xl space-y-5 flex flex-col justify-between border border-cyber-cardBorder hover:border-cyber-cyan/40 transition-all">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <div class="w-12 h-12 rounded-xl bg-cyber-cardBorder/60 flex items-center justify-center border border-cyber-cyan/30">
+                    <i data-lucide="${pillar.icon}" class="w-6 h-6 text-cyber-cyan"></i>
+                  </div>
+                  <span class="cyber-badge ${pillar.badgeColor}">${pillar.keyMetrics}</span>
+                </div>
+
+                <h3 class="text-xl font-bold font-display text-white">${pillar.title}</h3>
+                <p class="text-xs font-mono text-cyber-teal mt-1">${pillar.summary}</p>
+                <p class="text-xs text-cyber-muted mt-3 leading-relaxed">${pillar.description}</p>
+              </div>
+
+              <div class="space-y-3 pt-4 border-t border-cyber-cardBorder/60">
+                <span class="text-[11px] font-mono text-cyber-cyan uppercase font-bold tracking-wider block">KEY DELIVERABLES & HIGHLIGHTS:</span>
+                <ul class="space-y-1.5 text-xs text-cyber-muted font-sans">
+                  ${pillar.highlights.map(h => `
+                    <li class="flex items-start space-x-2">
+                      <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-cyber-teal shrink-0 mt-0.5"></i>
+                      <span>${h}</span>
+                    </li>
+                  `).join('')}
+                </ul>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+
+        <!-- Case Studies Showcase Section -->
+        <div class="cyber-card p-8 rounded-2xl space-y-8 border border-cyber-cyan/30">
+          <div class="border-b border-cyber-cardBorder pb-4">
+            <span class="text-xs font-mono text-cyber-cyan uppercase tracking-widest">REAL-WORLD EXAMPLES</span>
+            <h2 class="text-2xl font-bold font-display text-white">Featured Case Studies & Milestones</h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            ${CASE_STUDIES.map(cs => `
+              <div class="p-5 rounded-xl border border-cyber-cardBorder bg-cyber-bg/70 space-y-3 flex flex-col justify-between">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between text-xs font-mono text-cyber-teal">
+                    <span>${cs.category}</span>
+                    <span>${cs.date}</span>
+                  </div>
+                  <h4 class="font-bold text-white text-base font-display">${cs.title}</h4>
+                  <p class="text-xs text-cyber-muted leading-relaxed">${cs.summary}</p>
+                </div>
+
+                <div class="pt-3 border-t border-cyber-cardBorder/50 space-y-2">
+                  <div class="text-[11px] font-mono text-cyber-cyan font-bold">IMPACT: ${cs.impact}</div>
+                  <div class="flex flex-wrap gap-1">
+                    ${cs.tags.map(t => `<span class="px-2 py-0.5 rounded text-[10px] font-mono bg-cyber-cardBorder text-cyber-muted">#${t}</span>`).join('')}
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Join / Participate CTA -->
+        <div class="cyber-card p-8 rounded-2xl text-center space-y-4 border border-cyber-teal/30">
+          <h3 class="text-2xl font-bold font-display text-white">Want to contribute or learn with SHIELD?</h3>
+          <p class="text-sm text-cyber-muted max-w-xl mx-auto">
+            Whether you want to start learning cybersecurity fundamentals or compete in national CTFs, SHIELD provides free mentorship and lab resources to all NIT Hamirpur students.
+          </p>
+          <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+            <a href="#learning" class="btn-cyber-primary text-xs px-6 py-3">
+              <i data-lucide="book-open" class="w-4 h-4 mr-2"></i>
+              <span>Explore Learning Hub</span>
+            </a>
+            <a href="#events" class="btn-cyber-secondary text-xs px-6 py-3">
+              <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+              <span>Attend Next Workshop</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    `;
+  }
+
+  bindWorkListeners() {
+    document.querySelectorAll('.work-filter-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        this.workFilter = e.currentTarget.getAttribute('data-category');
+        this.renderSection('work');
+      });
+    });
+  }
+
   // --- LEARNING SECTION ROUTER & RENDERERS ---
 
   renderLearningSection(mainEl, subRoute) {
@@ -438,7 +603,6 @@ class ShieldApp {
       return;
     }
 
-    // Dynamic Domain & Lesson Router (e.g. "network-security" or "network-security/net-les-1")
     const parts = subRoute.split('/');
     const domainSlug = parts[0];
     const lessonId = parts[1];
@@ -452,7 +616,6 @@ class ShieldApp {
     }
   }
 
-  // 1. Learning Hub Overview Page
   getLearningHubHTML() {
     let filteredDomains = LEARNING_DOMAINS;
 
@@ -471,7 +634,6 @@ class ShieldApp {
     return `
       <div class="space-y-16 py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <!-- Hero Header -->
         <section class="text-center max-w-4xl mx-auto space-y-6">
           <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-cyber-cyan/10 border border-cyber-cyan/30 text-cyber-cyan text-xs font-mono">
             <i data-lucide="graduation-cap" class="w-4 h-4"></i>
@@ -505,7 +667,6 @@ class ShieldApp {
           </div>
         </section>
 
-        <!-- Quick Access Navigation Bar -->
         <div class="flex flex-wrap items-center justify-center gap-3 py-3 px-4 cyber-card rounded-xl border border-cyber-cardBorder">
           <span class="text-xs font-mono text-cyber-muted mr-2">QUICK HUBS:</span>
           <a href="#learning/my-learning" class="px-3 py-1.5 rounded bg-cyber-bg hover:bg-cyber-cardHover text-xs font-mono text-cyber-cyan flex items-center">
@@ -525,7 +686,6 @@ class ShieldApp {
           </a>
         </div>
 
-        <!-- Interactive Cybersecurity Roadmap -->
         <section id="roadmap-section" class="cyber-card p-6 sm:p-8 rounded-2xl space-y-6">
           <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-cyber-cardBorder pb-4">
             <div>
@@ -550,7 +710,6 @@ class ShieldApp {
           </div>
         </section>
 
-        <!-- Learning Domains Directory Header & Search Filter -->
         <section class="space-y-8">
           <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-cyber-cardBorder pb-6">
             <div>
@@ -559,7 +718,6 @@ class ShieldApp {
               <p class="text-xs text-cyber-muted mt-1">Note: These represent general cybersecurity learning paths and educational topics.</p>
             </div>
 
-            <!-- Search & Filters -->
             <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
               <div class="relative flex-1 sm:w-64">
                 <i data-lucide="search" class="w-4 h-4 absolute left-3 top-3 text-cyber-muted"></i>
@@ -575,7 +733,6 @@ class ShieldApp {
             </div>
           </div>
 
-          <!-- Domain Cards Grid -->
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             ${filteredDomains.map(domain => {
               const curriculum = getDomainCurriculum(domain.slug);
@@ -621,7 +778,6 @@ class ShieldApp {
                       <span><i data-lucide="clock" class="w-3.5 h-3.5 inline mr-1 text-cyber-teal"></i>${domain.estimatedTime}</span>
                     </div>
 
-                    <!-- Progress Bar -->
                     <div class="space-y-1">
                       <div class="flex justify-between text-[11px] font-mono text-cyber-muted">
                         <span>Progress</span>
@@ -665,7 +821,6 @@ class ShieldApp {
     }
   }
 
-  // 2. Specific Domain Learning Page (e.g. #learning/network-security)
   getLearningDomainHTML(domainSlug) {
     const curriculum = getDomainCurriculum(domainSlug);
     const domainMeta = LEARNING_DOMAINS.find(d => d.slug === domainSlug) || {
@@ -692,14 +847,12 @@ class ShieldApp {
     return `
       <div class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
-        <!-- Breadcrumb Navigation -->
         <nav class="flex items-center space-x-2 text-xs font-mono text-cyber-muted" aria-label="Breadcrumb">
           <a href="#learning" class="hover:text-cyber-cyan">Learning Hub</a>
           <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
           <span class="text-cyber-cyan font-bold">${curriculum.title}</span>
         </nav>
 
-        <!-- Domain Banner Header -->
         <div class="cyber-card p-8 rounded-2xl border border-cyber-cyan/30 space-y-6">
           <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div class="space-y-3 max-w-3xl">
@@ -711,7 +864,6 @@ class ShieldApp {
               <p class="text-sm text-cyber-muted leading-relaxed">${curriculum.description}</p>
             </div>
 
-            <!-- Progress Card -->
             <div class="shrink-0 w-full md:w-64 p-4 rounded-xl bg-cyber-bg/80 border border-cyber-cardBorder space-y-2">
               <div class="flex justify-between text-xs font-mono">
                 <span class="text-cyber-muted">Domain Progress</span>
@@ -725,7 +877,6 @@ class ShieldApp {
           </div>
         </div>
 
-        <!-- Curriculum Level Accordion / Modules -->
         <div class="space-y-8">
           ${curriculum.levels.map(level => `
             <div class="space-y-4">
@@ -745,8 +896,6 @@ class ShieldApp {
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                       ${mod.lessons.map(les => {
                         const isDone = learningProgress.isLessonCompleted(les.id);
-                        const isBookmarked = learningProgress.isBookmarked(les.id);
-
                         return `
                           <div class="p-4 rounded-xl border border-cyber-cardBorder bg-cyber-bg/60 hover:border-cyber-cyan/50 transition-all flex items-start justify-between gap-4">
                             <div class="space-y-1 max-w-sm">
@@ -777,11 +926,8 @@ class ShieldApp {
     `;
   }
 
-  bindDomainPageListeners(domainSlug) {
-    // Registered routes bind naturally via standard hash routing
-  }
+  bindDomainPageListeners(domainSlug) {}
 
-  // 3. Detailed Lesson Layout View (e.g. #learning/network-security/net-les-1)
   getLessonLayoutHTML(domainSlug, lessonId) {
     const curriculum = getDomainCurriculum(domainSlug);
     let targetLesson = null;
@@ -808,20 +954,17 @@ class ShieldApp {
       return `<div class="p-12 text-center text-white font-mono">Lesson not found. <a href="#learning" class="text-cyber-cyan underline">Return to Learning Hub</a></div>`;
     }
 
-    // Record visit in LocalStorage progress tracker
     learningProgress.recordVisit(domainSlug, targetLesson.id, targetLesson.title);
 
     const isCompleted = learningProgress.isLessonCompleted(targetLesson.id);
     const isBookmarked = learningProgress.isBookmarked(targetLesson.id);
 
-    // Find next lesson
     const currentIdx = allLessonsInDomain.findIndex(l => l.id === targetLesson.id);
     const nextLesson = allLessonsInDomain[currentIdx + 1];
 
     return `
       <div class="py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
-        <!-- Breadcrumb & Top Bar -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-cyber-cardBorder pb-4">
           <nav class="flex items-center space-x-2 text-xs font-mono text-cyber-muted truncate" aria-label="Breadcrumb">
             <a href="#learning" class="hover:text-cyber-cyan">Learning</a>
@@ -844,10 +987,8 @@ class ShieldApp {
           </div>
         </div>
 
-        <!-- Main Lesson Split View Layout -->
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
           
-          <!-- Left Sidebar Navigation Menu -->
           <aside class="lg:col-span-1 space-y-4">
             <div class="cyber-card p-4 rounded-xl space-y-3 sticky top-24 max-h-[80vh] overflow-y-auto">
               <h3 class="text-xs font-mono text-cyber-cyan uppercase tracking-wider border-b border-cyber-cardBorder pb-2 flex items-center justify-between">
@@ -870,22 +1011,18 @@ class ShieldApp {
             </div>
           </aside>
 
-          <!-- Right Content Column -->
           <main class="lg:col-span-3 space-y-8">
             
-            <!-- Lesson Header Title -->
             <div class="space-y-2">
               <span class="cyber-badge cyber-badge-cyan">${targetModule ? targetModule.title : 'Module'}</span>
               <h1 class="text-2xl sm:text-4xl font-display font-extrabold text-white">${targetLesson.title}</h1>
             </div>
 
-            <!-- Short Explanation -->
             <div class="cyber-card p-6 rounded-2xl space-y-3 border-l-4 border-l-cyber-cyan">
               <h3 class="text-xs font-mono text-cyber-cyan uppercase font-bold tracking-wider">CONCEPT OVERVIEW</h3>
               <p class="text-sm sm:text-base text-cyber-text leading-relaxed">${targetLesson.shortExplanation}</p>
             </div>
 
-            <!-- Why It Matters & How It Works -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div class="cyber-card p-6 rounded-2xl space-y-3 border-t-2 border-t-cyber-teal">
                 <h3 class="text-xs font-mono text-cyber-teal uppercase font-bold tracking-wider flex items-center">
@@ -902,7 +1039,6 @@ class ShieldApp {
               </div>
             </div>
 
-            <!-- Diagram Box (If Available) -->
             ${targetLesson.diagram ? `
               <div class="cyber-card p-6 rounded-2xl space-y-3">
                 <h3 class="text-xs font-mono text-cyber-cyan uppercase font-bold tracking-wider flex items-center">
@@ -912,7 +1048,6 @@ class ShieldApp {
               </div>
             ` : ''}
 
-            <!-- Real-World Example -->
             ${targetLesson.realWorldExample ? `
               <div class="cyber-card p-6 rounded-2xl space-y-3 bg-cyber-bg/80">
                 <h3 class="text-xs font-mono text-cyber-cyan uppercase font-bold tracking-wider flex items-center">
@@ -922,7 +1057,6 @@ class ShieldApp {
               </div>
             ` : ''}
 
-            <!-- Commands & Code Examples -->
             ${targetLesson.commands && targetLesson.commands.length > 0 ? `
               <div class="space-y-4">
                 <h3 class="text-base font-bold font-mono text-white flex items-center">
@@ -955,7 +1089,6 @@ class ShieldApp {
               </div>
             ` : ''}
 
-            <!-- Security Implications & Common Mistakes -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               ${targetLesson.securityImplications ? `
                 <div class="cyber-card p-6 rounded-2xl space-y-2 border-l-4 border-l-cyber-red">
@@ -972,7 +1105,6 @@ class ShieldApp {
               ` : ''}
             </div>
 
-            <!-- Safe Practical Exercise & Warning -->
             ${targetLesson.safeExercise ? `
               <div class="cyber-card p-6 rounded-2xl space-y-3 bg-cyber-cyan/5 border border-cyber-cyan/30">
                 <div class="flex items-center space-x-2 text-cyber-cyan">
@@ -986,7 +1118,6 @@ class ShieldApp {
               </div>
             ` : ''}
 
-            <!-- Interview Preparation Section -->
             ${targetLesson.interviewQuestions && targetLesson.interviewQuestions.length > 0 ? `
               <div class="cyber-card p-6 rounded-2xl space-y-4">
                 <h3 class="text-base font-bold font-mono text-white flex items-center">
@@ -994,7 +1125,7 @@ class ShieldApp {
                 </h3>
 
                 <div class="space-y-3">
-                  ${targetLesson.interviewQuestions.map((iq, idx) => `
+                  ${targetLesson.interviewQuestions.map(iq => `
                     <div class="p-4 rounded-xl border border-cyber-cardBorder bg-cyber-bg/60 space-y-2">
                       <div class="font-bold text-sm text-white font-display">Q: ${iq.q}</div>
                       <div class="text-xs text-cyber-cyan font-mono">A: ${iq.shortAnswer}</div>
@@ -1005,7 +1136,6 @@ class ShieldApp {
               </div>
             ` : ''}
 
-            <!-- Bottom Lesson Navigation Bar -->
             <div class="flex items-center justify-between pt-6 border-t border-cyber-cardBorder">
               <a href="#learning/${domainSlug}" class="btn-cyber-outline text-xs px-4 py-2">
                 ← Back to Domain
@@ -1035,7 +1165,7 @@ class ShieldApp {
     if (bookmarkBtn) {
       bookmarkBtn.addEventListener('click', (e) => {
         const id = e.currentTarget.getAttribute('data-id');
-        const state = learningProgress.toggleBookmark(id);
+        learningProgress.toggleBookmark(id);
         this.renderSection('learning', `${domainSlug}/${lessonId}`);
       });
     }
@@ -1044,7 +1174,7 @@ class ShieldApp {
     if (completeBtn) {
       completeBtn.addEventListener('click', (e) => {
         const id = e.currentTarget.getAttribute('data-id');
-        const state = learningProgress.toggleLessonCompleted(id);
+        learningProgress.toggleLessonCompleted(id);
         this.renderSection('learning', `${domainSlug}/${lessonId}`);
       });
     }
@@ -1059,14 +1189,12 @@ class ShieldApp {
     });
   }
 
-  // 4. My Learning Progress Dashboard (#learning/my-learning)
   getMyLearningHTML() {
     const stats = learningProgress.getOverallStats(LEARNING_DOMAINS);
 
     return `
       <div class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
-        <!-- Header -->
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-cyber-cardBorder pb-6">
           <div>
             <span class="text-xs font-mono text-cyber-cyan uppercase tracking-widest">PERSONAL PROGRESS DASHBOARD</span>
@@ -1078,7 +1206,6 @@ class ShieldApp {
           </a>
         </div>
 
-        <!-- Quick Stats Cards -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
           <div class="cyber-card p-6 rounded-2xl space-y-1">
             <div class="text-3xl font-mono font-bold text-cyber-cyan">${stats.completedCount}</div>
@@ -1098,7 +1225,6 @@ class ShieldApp {
           </div>
         </div>
 
-        <!-- Continue Where You Left Off Card -->
         ${stats.lastActive ? `
           <div class="cyber-card p-6 rounded-2xl border border-cyber-cyan/40 space-y-3 bg-cyber-cyan/5">
             <span class="cyber-badge cyber-badge-cyan">CONTINUE LEARNING</span>
@@ -1111,7 +1237,6 @@ class ShieldApp {
           </div>
         ` : ''}
 
-        <!-- Bookmarked Topics Grid -->
         <div class="cyber-card p-6 rounded-2xl space-y-4">
           <h3 class="text-lg font-bold font-display text-white flex items-center">
             <i data-lucide="bookmark" class="w-5 h-5 text-cyber-cyan mr-2"></i> Bookmarked Lessons
@@ -1137,7 +1262,6 @@ class ShieldApp {
 
   bindMyLearningListeners() {}
 
-  // 5. Glossary Page (#learning/glossary)
   getGlossaryHTML() {
     const filtered = this.glossarySearch.trim() === ''
       ? GLOSSARY_ITEMS
@@ -1154,7 +1278,6 @@ class ShieldApp {
           <p class="text-cyber-muted text-sm sm:text-base">Instant reference dictionary of essential security acronyms and terminology.</p>
         </div>
 
-        <!-- Search Bar -->
         <div class="relative max-w-md mx-auto">
           <i data-lucide="search" class="w-4 h-4 absolute left-3 top-3 text-cyber-muted"></i>
           <input type="text" id="glossary-search-input" value="${this.glossarySearch}" placeholder="Search term (e.g. XSS, TCP, TLS)..." class="w-full pl-9 pr-4 py-2.5 bg-cyber-card border border-cyber-cardBorder rounded-md text-sm text-white focus:border-cyber-cyan focus:outline-none" />
@@ -1185,7 +1308,6 @@ class ShieldApp {
     }
   }
 
-  // 6. Cheatsheets Page (#learning/cheatsheets)
   getCheatsheetsHTML() {
     return `
       <div class="py-12 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
@@ -1212,7 +1334,6 @@ class ShieldApp {
 
   bindCheatsheetsListeners() {}
 
-  // 7. Security Tools Directory Page (#learning/tools)
   getToolsHTML() {
     return `
       <div class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
@@ -1252,7 +1373,6 @@ class ShieldApp {
     `;
   }
 
-  // 8. Command Reference Page (#learning/commands)
   getCommandsHTML() {
     return `
       <div class="py-12 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
@@ -1285,11 +1405,10 @@ class ShieldApp {
     `;
   }
 
-  // --- EXISTING SECTIONS (HOME, ABOUT, TEAM, EVENTS, PROJECTS, BLOG, GALLERY, SPONSORS, FAQ, CONTACT) ---
+  // --- EXISTING SECTIONS ---
 
   getHomeHTML() {
     return `
-      <!-- Hero Banner Section -->
       <section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden py-20">
         <canvas id="cyber-canvas" class="absolute inset-0 w-full h-full pointer-events-auto z-0"></canvas>
         
@@ -1312,13 +1431,13 @@ class ShieldApp {
           </p>
 
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <a href="#learning" class="btn-cyber-primary w-full sm:w-auto text-sm px-6 py-3">
-              <i data-lucide="book-open" class="w-4 h-4 mr-2"></i>
-              <span>Explore Learning Hub</span>
+            <a href="#work" class="btn-cyber-primary w-full sm:w-auto text-sm px-6 py-3">
+              <i data-lucide="briefcase" class="w-4 h-4 mr-2"></i>
+              <span>Explore Our Work</span>
             </a>
-            <a href="#events" class="btn-cyber-secondary w-full sm:w-auto text-sm px-6 py-3">
-              <i data-lucide="terminal" class="w-4 h-4 mr-2"></i>
-              <span>Events & CTFs</span>
+            <a href="#learning" class="btn-cyber-secondary w-full sm:w-auto text-sm px-6 py-3">
+              <i data-lucide="book-open" class="w-4 h-4 mr-2"></i>
+              <span>Learning Hub</span>
             </a>
             <a href="${SOCIETY_INFO.discord}" target="_blank" rel="noopener noreferrer" class="btn-cyber-outline w-full sm:w-auto text-sm px-6 py-3">
               <i data-lucide="message-square" class="w-4 h-4 mr-2 text-cyber-cyan"></i>
@@ -1339,7 +1458,6 @@ class ShieldApp {
         </div>
       </section>
 
-      <!-- Domain Highlights -->
       <section class="py-20 border-t border-cyber-cardBorder bg-cyber-bg/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
@@ -1373,7 +1491,6 @@ class ShieldApp {
         </div>
       </section>
 
-      <!-- Featured Flagship CTF Banner -->
       <section class="py-16 bg-cyber-card/40 border-y border-cyber-cardBorder">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-8">
           <div class="space-y-4 max-w-2xl">
@@ -1432,9 +1549,7 @@ class ShieldApp {
         </div>
 
         <div class="cyber-card p-8 rounded-2xl flex flex-col md:flex-row items-center gap-8 border border-cyber-cyan/20">
-          <div class="w-32 h-32 rounded-full border-2 border-cyber-cyan shadow-neon-cyan bg-cyber-card flex items-center justify-center flex-shrink-0">
-            <i data-lucide="user" class="w-16 h-16 text-cyber-cyan/30"></i>
-          </div>
+          <img src="${SOCIETY_INFO.facultyAdvisor.image}" alt="${SOCIETY_INFO.facultyAdvisor.name}" class="w-32 h-32 rounded-full object-cover border-2 border-cyber-cyan shadow-neon-cyan" />
           <div class="space-y-3 text-center md:text-left">
             <span class="cyber-badge cyber-badge-cyan">FACULTY ADVISOR SPOTLIGHT</span>
             <h3 class="text-2xl font-bold text-white font-display">${SOCIETY_INFO.facultyAdvisor.name}</h3>
@@ -1471,9 +1586,7 @@ class ShieldApp {
             <div class="cyber-card rounded-2xl p-6 space-y-4 flex flex-col justify-between">
               <div>
                 <div class="relative mb-4">
-                  <div class="w-full h-56 rounded-xl border border-cyber-cardBorder bg-cyber-card flex items-center justify-center">
-                    <i data-lucide="user" class="w-20 h-20 text-cyber-cyan/20"></i>
-                  </div>
+                  <img src="${member.image}" alt="${member.name}" class="w-full h-56 object-cover rounded-xl border border-cyber-cardBorder" />
                   <span class="absolute top-3 right-3 cyber-badge cyber-badge-cyan">${member.batch}</span>
                 </div>
                 <h3 class="text-xl font-bold font-display text-white">${member.name}</h3>
@@ -1846,7 +1959,7 @@ class ShieldApp {
   openMemberModal(member) {
     const modal = document.getElementById('member-modal');
     if (!modal) return;
-    // member image hidden until photo is provided
+    document.getElementById('member-modal-img').src = member.image;
     document.getElementById('member-modal-name').innerText = member.name;
     document.getElementById('member-modal-role').innerText = member.role;
     document.getElementById('member-modal-batch').innerText = member.batch;
