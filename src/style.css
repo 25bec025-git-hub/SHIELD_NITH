@@ -156,7 +156,8 @@
 .chat-chip {
   white-space: nowrap !important;
   flex-shrink: 0 !important;
-  display: inline-flex !items-center;
+  display: inline-flex;
+  align-items: center;
   padding: 6px 14px;
   font-size: 11px;
   font-family: 'Inter', sans-serif;

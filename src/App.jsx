@@ -20,9 +20,13 @@ import FaqSection from './components/sections/FaqSection.jsx';
 import ContactSection from './components/sections/ContactSection.jsx';
 
 export default function App() {
-  const [activeSection, setActiveSection] = useState(() => {
-    const hash = window.location.hash.replace('#', '');
-    return hash || 'home';
+  const [routeState, setRouteState] = useState(() => {
+    const rawHash = window.location.hash.replace('#', '');
+    const parts = rawHash.split('/');
+    return {
+      main: parts[0] || 'home',
+      sub: parts[1] || null,
+    };
   });
 
   const [analyticsOpen, setAnalyticsOpen] = useState(false);
@@ -32,12 +36,28 @@ export default function App() {
 
   useEffect(() => {
     const handleHashChange = () => {
-      const hash = window.location.hash.replace('#', '');
-      if (hash) setActiveSection(hash);
+      const rawHash = window.location.hash.replace('#', '');
+      const parts = rawHash.split('/');
+      setRouteState({
+        main: parts[0] || 'home',
+        sub: parts[1] || null,
+      });
     };
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
+
+  const handleNavigateSection = (sectionId) => {
+    window.location.hash = `#${sectionId}`;
+  };
+
+  const handleNavigateCourse = (courseSlug) => {
+    if (courseSlug) {
+      window.location.hash = `#learning/${courseSlug}`;
+    } else {
+      window.location.hash = '#learning';
+    }
+  };
 
   const handleOpenRegister = (eventTitle) => {
     setRegisterEventTitle(eventTitle || 'SHIELD Event');
@@ -45,7 +65,7 @@ export default function App() {
   };
 
   const renderSection = () => {
-    switch (activeSection) {
+    switch (routeState.main) {
       case 'work':
         return <WorkSection />;
       case 'about':
@@ -57,7 +77,7 @@ export default function App() {
       case 'projects':
         return <ProjectsSection />;
       case 'learning':
-        return <LearningSection />;
+        return <LearningSection activeCourseSlug={routeState.sub} onNavigateCourse={handleNavigateCourse} />;
       case 'blog':
         return <BlogSection />;
       case 'gallery':
@@ -70,7 +90,7 @@ export default function App() {
         return <ContactSection />;
       case 'home':
       default:
-        return <HomeSection setActiveSection={setActiveSection} onOpenJoinModal={() => setJoinModalOpen(true)} />;
+        return <HomeSection setActiveSection={handleNavigateSection} onOpenJoinModal={() => setJoinModalOpen(true)} />;
     }
   };
 
@@ -81,8 +101,8 @@ export default function App() {
 
       {/* Header Navigation */}
       <Navbar
-        activeSection={activeSection}
-        setActiveSection={setActiveSection}
+        activeSection={routeState.main}
+        setActiveSection={handleNavigateSection}
         onOpenAnalytics={() => setAnalyticsOpen(true)}
         onOpenJoinModal={() => setJoinModalOpen(true)}
       />
@@ -93,7 +113,7 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <Footer setActiveSection={setActiveSection} />
+      <Footer setActiveSection={handleNavigateSection} />
 
       {/* Groq AI + Live Web Search CyberBot */}
       <CyberBot />
